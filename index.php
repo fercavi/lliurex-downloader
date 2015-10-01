@@ -8,87 +8,12 @@
     <link href="css/index.css" rel="stylesheet">
     <script>
       //inicialitzacio
-      var versio_actual='15.05';
-      var idioma_altres_versions='Altres versions';
-      var idioma_versions = 'Versions';
-      var idioma_descarrega = "Descarrega";
-      var sabors=[
-        {
-        codi:0,
-        nom:'LliureX Client',
-        descripcio:'El LliureX Model de Centre (amb versió per a servidors i clients) amplia el tradicional model d&apos;aula. En el model d&apos;aula, les aules d&apos;informàtica formen una xarxa independent que disposa d&apos;un servidor a què es poden connectar tant estacions de treball com clients lleugers (clients). El nou model de centre, a més, permet la interconnexió de les diverses aules amb un servidor de centre.',
-        img:'img/lliurex-client.png',          
-       }
-       ,
-       {
-       codi:1,
-       nom:'Lliurex Escriptori',
-       descripcio:'LliureX Escriptori és l&apos;adaptació de la distribució LliureX genèrica, dissenyada per als ordinadors personals, de la sala del professorat, secretaries, etc. És a dir, està destinada a instal·lar-se en els ordinadors que no depenen d&apos;un servidor (que no es troben dins de l&apos;aula d&apos;informàtica, o en la biblioteca...).',
-       img:'img/lliurex-escriptori.png',
-       },
-      ];
-      var arquitectures=[
-       {
-         codi:0,
-         nom:'32 bits',
-       },
-       {
-         codi:1,
-         nom:'64 bits',
-       },
-       {
-         codi:2,
-         nom:'Raspberry',
-        } 
-      ]
-      var versions=[
-        "13.06",
-        "14.06",
-        "15.05",
-      ];
-      var imatges=[
-        {
-          versio:'13.06',
-          sabor:0,
-          url:'isos/13.06/releases/lliurex-client_1306.iso',
-          nom:'13.06 latest',
-          arquitectura:0,
-          latest:1,
-        },
-        {
-          versio:'13.06',
-          sabor:0,
-          url:'isos/13.06/releases/lliurex-client_1306_2.iso',
-          nom:'13.06 vella',
-          arquitectura:0,
-          latest:0,
-        },
-        {
-          versio:'13.06',
-          sabor:0,
-          url:'isos/13.06/eleases/lliurex-client_amd64_1306.iso',
-          nom:'13.06 64 latest',
-          arquitectura:1,
-          latest:1,
-        },
-        {
-          versio:'13.06',
-          sabor:0,
-          url:'isos/13.06/releases/lliurex-client_amd64_1306_2.iso',
-          nom:'13.06 64 vella',
-          arquitectura:1,
-          latest:0,
-        },        
-        {          
-          versio:'13.06',
-          sabor:'1',       
-          nom:'13.06 única',
-          url :'isos/13.06/releases/lliurex-escriptori_1306.iso',
-          arquitectura:0,
-          latest:0,
-        }
-      ];
-     //fi del bloc d'inicialització'
+      var versio_actual='';//'15.05';
+      var idioma_altres_versions='';//'Altres versions';
+      var idioma_versions = '';//'Versions';
+      var idioma_descarrega = '';//"Descarrega";
+
+
       function aplicarFiltreImatges(orige,filtre,valor){
         var imatgesFiltrades = [];
         for(var i=0;i<orige.length;i++){
@@ -166,6 +91,25 @@
         //$( ".panel" ).draggable();
       }
       function carregaInicial(){
+        var peticio={
+          url:'servidor.php',
+          type:'get',
+          data:'idioma=val',
+          success:function(result){
+            data = JSON.parse(result);
+            sabors = data.sabors;
+            idioma_altres_versions=data.altres_versions,
+            versio_actual = data.versio_actual,
+            idioma_descarrega = data.descarrega,
+            idioma_versions = data.idioma_versions,
+            versions = data.versions;
+            imatges = data.imatges;
+            carregaInicialCallback();
+          }
+        }
+        $.ajax(peticio);
+      }
+      function carregaInicialCallback(){
         var html='<div class="row"><div class="dropdown col-md-6 col-md-offset-1"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+idioma_altres_versions+'<span class="caret"></span>  </button>';
         html +='<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">';
         for(var i=0;i<versions.length;i++){

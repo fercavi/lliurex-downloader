@@ -2,12 +2,37 @@
 $carpeta = "./isos";
 $subcarpeta = "/releases";
 $sufix = "_64bits";
-$imatge="/img";
+$imatge="img/";
+$versio_actual = "15.05";
+
 
 $versions = array();
 $sabors = array();
+$sabors_complets = array();
 $isos = array();
-$arxius = buscaIsos();
+
+
+
+//ara mirem els idiomes
+$_idiomes = buscaArxius('./lang',".php");
+$llistat_idiomes = array();
+for($i=0;$i<count($_idiomes);$i++){
+  $nomidioma= basename($_idiomes[$i][0],'.php');
+  $llistat_idiomes[]=$nomidioma;
+}
+//ara mirem quin idioma és el triat
+$idioma_seleccionat = 'val'; //per defecte
+if (isset($_GET["idioma"])){
+   $_idioma = $_GET["idioma"];   
+  if (file_exists('./lang/'.$_idioma. '.php')){
+    $idioma_seleccionat=$_GET["idioma"];
+  }
+}
+require_once('./lang/'.$idioma_seleccionat. '.php'); //les descripcions de la interfície en l'idioma corresponent estaran en $lang_array
+
+
+//processem totes les isos per afegir-les al vector i tindre una base de dades
+$arxius = buscaArxius("./isos/",".iso");
 for($i=0;$i<count($arxius);$i++){
   $carpetes = explode("/",$arxius[$i][0]);
   //afegim versions diferents
@@ -42,7 +67,26 @@ for($i=0;$i<count($arxius);$i++){
   $isos[]=$iso;
   
 }
-var_export($versions);
+//ara creem la base de dades de sabors
+for($i=0;$i<count($sabors);$i++){
+  $sabors_complets[]=array(
+    "codi"=>$i,
+    "nom"=>$lang_array[$sabors[$i]."_nom"],
+    "descripcio"=>$lang_array[$sabors[$i]],
+    "img"=>$imatge."lliurex-".$sabors[$i].".png",  
+    );  
+}
+$result = array(
+  "sabors"=>$sabors_complets,
+  "altres_versions"=>$lang_array["altres_versions"],
+  "idioma_versions"=>$lang_array["versions"],
+  "descarrega"=>$lang_array["descarrega"],
+  "versio_actual"=>$versio_actual,
+  "versions"=>$versions,
+  "imatges"=>$isos,
+);
+echo json_encode($result);
+
 
 
 
@@ -54,11 +98,11 @@ function es64bits($cadena){
   }
   return $result;
 }
-function buscaIsos(){
+function buscaArxius($ruta,$filtre){
   $arxius = array();
-  $Directory = new RecursiveDirectoryIterator("./isos/");
-  $It = new RecursiveIteratorIterator($Directory);
-  $Regex = new RegexIterator($It,'/^.+\.iso$/i',RecursiveRegexIterator::GET_MATCH);
+  $Directory = new RecursiveDirectoryIterator($ruta);
+  $It = new RecursiveIteratorIterator($Directory);  
+  $Regex = new RegexIterator($It,'/^.+\\'.$filtre.'$/i',RecursiveRegexIterator::GET_MATCH);
   foreach($Regex as $v){
     $arxius[]=$v;
   }
