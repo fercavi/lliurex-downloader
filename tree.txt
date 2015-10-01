@@ -1,0 +1,162 @@
+.
+|-- ./01_old_versions
+|   |-- ./01_old_versions/05.09
+|   |   `-- ./01_old_versions/05.09/lliurex-escriptori_0509_20150608.iso
+|   |-- ./01_old_versions/08.09
+|   |   |-- ./01_old_versions/08.09/MD5SUM.iso
+|   |   |-- ./01_old_versions/08.09/lliurex-biblioteca_0809.iso
+|   |   |-- ./01_old_versions/08.09/lliurex-client_0809.iso
+|   |   |-- ./01_old_versions/08.09/lliurex-escriptori_0809.iso
+|   |   |-- ./01_old_versions/08.09/lliurex-lleuger_0809.iso
+|   |   `-- ./01_old_versions/08.09/lliurex-servidor_0809.iso
+|   |-- ./01_old_versions/09.09
+|   |   |-- ./01_old_versions/09.09/lliurex-biblioteca_0909.iso -> lliurex-servidor_0909.iso
+|   |   |-- ./01_old_versions/09.09/lliurex-client_0909.iso
+|   |   |-- ./01_old_versions/09.09/lliurex-escriptori_0909.iso
+|   |   |-- ./01_old_versions/09.09/lliurex-infantil_0909.iso
+|   |   |-- ./01_old_versions/09.09/lliurex-lleuger_0909.iso
+|   |   |-- ./01_old_versions/09.09/lliurex-musica_0909.iso
+|   |   |-- ./01_old_versions/09.09/lliurex-servidor_0909.iso
+|   |   `-- ./01_old_versions/09.09/llx0909.img -> ../../leia/releases/llx1009.img
+|   |-- ./01_old_versions/10.09
+|   |   |-- ./01_old_versions/10.09/MD5SUMS
+|   |   |-- ./01_old_versions/10.09/lliurex-biblioteca_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-client_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-escriptori_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-infantil_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-lleuger_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-modeloaula_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-musica_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-pime_1009.iso
+|   |   |-- ./01_old_versions/10.09/lliurex-servidor_1009.iso
+|   |   `-- ./01_old_versions/10.09/llx1009.img
+|   |-- ./01_old_versions/11.09
+|   |   |-- ./01_old_versions/11.09/MD5SUM
+|   |   |-- ./01_old_versions/11.09/lliurex-biblioteca_1109_20120404.iso
+|   |   |-- ./01_old_versions/11.09/lliurex-client_1109_20120404.iso
+|   |   |-- ./01_old_versions/11.09/lliurex-escriptori_1109_20120404.iso
+|   |   |-- ./01_old_versions/11.09/lliurex-infantil_1109_20120410.iso
+|   |   |-- ./01_old_versions/11.09/lliurex-lleuger_1109_20120410.iso
+|   |   |-- ./01_old_versions/11.09/lliurex-musica_1109_20120410.iso
+|   |   |-- ./01_old_versions/11.09/lliurex-pime_1109_20120410.iso
+|   |   `-- ./01_old_versions/11.09/lliurex-servidor_1109_20120404.iso
+|   `-- ./01_old_versions/12.06
+|       |-- ./01_old_versions/12.06/MD5SUM
+|       |-- ./01_old_versions/12.06/lliurex-biblioteca_1206_20121123.iso
+|       |-- ./01_old_versions/12.06/lliurex-client_1206_20121121.iso
+|       |-- ./01_old_versions/12.06/lliurex-escriptori_1206_20121121.iso
+|       |-- ./01_old_versions/12.06/lliurex-infantil_1206_20121121.iso
+|       |-- ./01_old_versions/12.06/lliurex-lleuger_1206_20121123.iso
+|       |-- ./01_old_versions/12.06/lliurex-musica_1206_20121122.iso
+|       |-- ./01_old_versions/12.06/lliurex-pime_1206_20121122.iso
+|       `-- ./01_old_versions/12.06/lliurex-servidor_1206_20121121.iso
+|-- ./13.06
+|   |-- ./13.06/64bits.link
+|   |-- ./13.06/ltsp
+|   |-- ./13.06/news.link
+|   `-- ./13.06/releases
+|       |-- ./13.06/releases/MD5SUM
+|       |-- ./13.06/releases/lliurex-client_1306.iso
+|       |-- ./13.06/releases/lliurex-client_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-escriptori_1306.iso
+|       |-- ./13.06/releases/lliurex-escriptori_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-infantil_1306.iso
+|       |-- ./13.06/releases/lliurex-infantil_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-lleuger_1306.iso
+|       |-- ./13.06/releases/lliurex-lleuger_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-musica-pro_1306.iso
+|       |-- ./13.06/releases/lliurex-musica-pro_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-musica_1306.iso
+|       |-- ./13.06/releases/lliurex-musica_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-pime_1306.iso
+|       |-- ./13.06/releases/lliurex-pime_1306.iso.zsync
+|       |-- ./13.06/releases/lliurex-servidor_1306.iso
+|       `-- ./13.06/releases/lliurex-servidor_1306.iso.zsync
+|-- ./13.06_64bits
+|   |-- ./13.06_64bits/32bits.link
+|   `-- ./13.06_64bits/releases
+|       |-- ./13.06_64bits/releases/MD5SUM
+|       |-- ./13.06_64bits/releases/lliurex-client-amd64_1306.iso
+|       |-- ./13.06_64bits/releases/lliurex-client-amd64_1306.iso.zsync
+|       |-- ./13.06_64bits/releases/lliurex-escriptori-amd64_1306.iso
+|       |-- ./13.06_64bits/releases/lliurex-escriptori-amd64_1306.iso.zsync
+|       |-- ./13.06_64bits/releases/lliurex-infantil-amd64_1306.iso
+|       |-- ./13.06_64bits/releases/lliurex-infantil-amd64_1306.iso.zsync
+|       |-- ./13.06_64bits/releases/lliurex-lleuger-amd64_1306.iso
+|       |-- ./13.06_64bits/releases/lliurex-lleuger-amd64_1306.iso.zsync
+|       |-- ./13.06_64bits/releases/lliurex-musica-amd64_1306.iso
+|       |-- ./13.06_64bits/releases/lliurex-musica-amd64_1306.iso.zsync
+|       |-- ./13.06_64bits/releases/lliurex-pime-amd64_1306.iso
+|       |-- ./13.06_64bits/releases/lliurex-pime-amd64_1306.iso.zsync
+|       |-- ./13.06_64bits/releases/lliurex-servidor-amd64_1306.iso
+|       `-- ./13.06_64bits/releases/lliurex-servidor-amd64_1306.iso.zsync
+|-- ./14.06
+|   |-- ./14.06/64bits.link
+|   |-- ./14.06/beta
+|   |   |-- ./14.06/beta/lliurex-client-kernel-3-13_1406_20140911.iso
+|   |   |-- ./14.06/beta/lliurex-escriptori-kernel-3-13_1406_20140912.iso
+|   |   `-- ./14.06/beta/lliurex-pime-kernel-3-13_1406_20140911.iso
+|   `-- ./14.06/releases
+|       |-- ./14.06/releases/MD5SUM
+|       |-- ./14.06/releases/lliurex-berry_1406_20140709.tgz
+|       |-- ./14.06/releases/lliurex-client_1406_20141219.iso
+|       |-- ./14.06/releases/lliurex-escriptori_1406_20141219.iso
+|       |-- ./14.06/releases/lliurex-infantil_1406_20150105.iso
+|       |-- ./14.06/releases/lliurex-lleuger_1406_20140826.iso
+|       |-- ./14.06/releases/lliurex-musica_1406_20140826.iso
+|       |-- ./14.06/releases/lliurex-pime_1406_20140826.iso
+|       `-- ./14.06/releases/lliurex-servidor_1406_20141217.iso
+|-- ./14.06_64bits
+|   |-- ./14.06_64bits/32bits.link
+|   |-- ./14.06_64bits/beta
+|   `-- ./14.06_64bits/releases
+|       |-- ./14.06_64bits/releases/MD5SUM
+|       |-- ./14.06_64bits/releases/lliurex-client-amd64_1406_20140826.iso
+|       |-- ./14.06_64bits/releases/lliurex-escriptori-amd64_1406_20140826.iso
+|       |-- ./14.06_64bits/releases/lliurex-infantil-amd64_1406_20140826.iso
+|       |-- ./14.06_64bits/releases/lliurex-lleuger-amd64_1406_20140826.iso
+|       |-- ./14.06_64bits/releases/lliurex-musica-amd64_1406_20140826.iso
+|       |-- ./14.06_64bits/releases/lliurex-pime-amd64_1406_20140826.iso
+|       `-- ./14.06_64bits/releases/lliurex-servidor-amd64_1406_20140826.iso
+|-- ./15.05
+|   |-- ./15.05/64bits.link
+|   `-- ./15.05/releases
+|       |-- ./15.05/releases/MD5SUM
+|       |-- ./15.05/releases/lliurex-client_1505_20150720.iso
+|       |-- ./15.05/releases/lliurex-client_1505_20150902.iso
+|       |-- ./15.05/releases/lliurex-escriptori_1505_20150720.iso
+|       |-- ./15.05/releases/lliurex-escriptori_1505_20150902.iso
+|       |-- ./15.05/releases/lliurex-infantil_1505_20150720.iso
+|       |-- ./15.05/releases/lliurex-infantil_1505_20150902.iso
+|       |-- ./15.05/releases/lliurex-musica_1505_20150629.iso
+|       |-- ./15.05/releases/lliurex-musica_1505_20150902.iso
+|       |-- ./15.05/releases/lliurex-pime_1505_20150722.iso
+|       |-- ./15.05/releases/lliurex-pime_1505_20150902.iso
+|       |-- ./15.05/releases/lliurex-servidor_1505_20150720.iso
+|       |-- ./15.05/releases/lliurex-servidor_1505_20150902.iso
+|       `-- ./15.05/releases/lliurex-servidor_1505_20150904.iso
+|-- ./15.05_64bits
+|   |-- ./15.05_64bits/32bits.link
+|   `-- ./15.05_64bits/releases
+|       |-- ./15.05_64bits/releases/MD5SUM
+|       |-- ./15.05_64bits/releases/lliurex-client-amd64_1505_201500716.iso
+|       |-- ./15.05_64bits/releases/lliurex-client-amd64_1505_20150902.iso
+|       |-- ./15.05_64bits/releases/lliurex-escriptori-amd64_1505_20150722.iso
+|       |-- ./15.05_64bits/releases/lliurex-escriptori-amd64_1505_20150902.iso
+|       |-- ./15.05_64bits/releases/lliurex-infantil-amd64_1505_20150716.iso
+|       |-- ./15.05_64bits/releases/lliurex-infantil-amd64_1505_20150902.iso
+|       |-- ./15.05_64bits/releases/lliurex-musica-amd64_1505_20150907.iso
+|       |-- ./15.05_64bits/releases/lliurex-servidor-amd64_1505_20150902.iso
+|       `-- ./15.05_64bits/releases/lliurex-servidor-amd64_1505_20150921.iso
+|-- ./releases
+|   |-- ./releases/beta
+|   |-- ./releases/daily
+|   `-- ./releases/releases
+|       |-- ./releases/releases/lliurex-servidor-amd64_1306_20130704.iso.zsync
+|       |-- ./releases/releases/lliurex-servidor_1306_20130704.iso
+|       |-- ./releases/releases/lliurex-servidor_1306_20130704.iso.zsync
+|       |-- ./releases/releases/llx-netinstall.tar.gz
+|       `-- ./releases/releases/make-zsync.sh
+`-- ./tree.txt
+
+26 directories, 133 files
