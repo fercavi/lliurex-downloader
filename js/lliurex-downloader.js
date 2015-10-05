@@ -58,12 +58,18 @@
          if (filtre32bitslatest.length>0)
            url32=filtre32bitslatest[0].url;
          else
-          url32 = filtre32bits[0].url;
+           if(filtre32bits.length>0)
+              url32 = filtre32bits[0].url;
+            else
+              url32 = '';
           
         if (filtre64bitslatest.length>0)
            url64=filtre64bitslatest[0].url;
         else
+           if(filtre64bits.length>0)
             url64=filtre64bits[0].url;         
+          else
+            url64 = '';
          var html='<div id="menu"><div class="list-group panel"><a href="#" class="list-group-item active ">32 bits <span style="border-radius:10px;float:right;position:relative;bottom:7px" class="btn btn-info" onclick="descarrega(&apos;'+url32+'&apos;)">'+idioma_descarrega+'&nbsp;<span class="glyphicon glyphicon-save"></span></span><span style="border-radius:10px;float:right;bottom:7px;position:relative" class="btn btn-info" data-parent="#menu" data-toggle="collapse" data-target="#d32bits" ">'+idioma_mesopcions+'&nbsp;<span class="glyphicon glyphicon-plus"></span> </span></a>';
          html +="<div id='d32bits' class='sublinks collapse'>";
          for(var i=0;i<filtre32bits.length;i++){          
@@ -98,8 +104,8 @@
       function creaHtmlSabors(versio){
             var html ="";
             var filtreVersio = aplicarFiltreImatges(imatges,'versio',versio);
-            for (var j=0;j<sabors.length;j++){
-              var filtreSabor = aplicarFiltreImatges(filtreVersio,"sabor",sabors[j].codi);
+            for (var j=0;j<sabors.length;j++){                          
+              var filtreSabor = aplicarFiltreImatges(filtreVersio,"sabor",sabors[j].codi);              
               if (filtreSabor.length>0){
                 html += "<div class='row'><div class='col-md-10 col-md-offset-1'><div class='panel panel-info'>";
                 html += "<div class='panel-heading'>";
