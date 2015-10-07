@@ -1,7 +1,7 @@
 <?php
 $lang_array = array(
   "client_nom"=>"Cliente",
-  "client"=>"Esta versión para equipos clientes está destinada a todos aquellos ordenadores que están conectados a un servidor LliureX bien sea en un modelo de centro o un modelo de aula tradiciona.",
+  "client"=>"Esta versión para equipos clientes está destinada a todos aquellos ordenadores que están conectados a un servidor LliureX bien sea en un modelo de centro o un modelo de aula tradicional.",
   "escriptori_nom"=>"LliureX Escritorio",
   "escriptori"=>"LliureX Escritorio es la adaptación de la distribución LliureX genérica, diseñada para los ordenados personales, de la sala de profesores, secretarías... Es decir, está destinada a ser instalada en los ordenadores que no dependen de un servidor (que no están dentro del aula de informática, o en biblioteca...) como por ejemplo equipos portátiles y ordenadores personales.",
   "infantil_nom"=>"LliureX Infantil",
