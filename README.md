@@ -31,5 +31,20 @@ Per a funcionar necessitarà que el servidor (servidor.php, es pot canviar en ca
     
     contenedorEstructura: identificador de les caixes on estaran tots els sabors a abaixar
     
-    #### vector sabors
-    #### vector imatges
+#### vector sabors
+el vector sabors serà un vector on cada element tindrà:
+   
+   nom: Nom del sabor (a l'idioma seleccionat)
+   
+   img: ruta de la imatge (podria ser una diferent per idioma, depen del servidor, això no està implementat)
+   
+   codi: codi del sabor per indentificar-lo
+   
+   descripcio: descripcio llarga(a l'idioma seleccionat)
+#### vector imatges
+el  vector d'imatges contindrà, entre altres coses les url per a abaixar:
+
+    url: url del arxiu per abaixar
+    arquitectura: senyala l'arquitectura, de moment 0: 32 bits, 1 :64 bits
+    nom: nom genèric de la imatge
+    nomarxiu: última part de la url, el nom complet de l'arxiu
