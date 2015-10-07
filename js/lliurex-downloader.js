@@ -137,8 +137,7 @@
           type:'get',
           data:'idioma='+idiomaACarregar,
           success:function(result){                        
-            data = JSON.parse(result);
-            alert(JSON.stringify(data.versions));
+            data = JSON.parse(result);            
             sabors = data.sabors;
             idioma_altres_versions=data.altres_versions,
             versio_actual = data.versio_actual,
