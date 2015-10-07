@@ -136,8 +136,9 @@
           url:'servidor.php',
           type:'get',
           data:'idioma='+idiomaACarregar,
-          success:function(result){            
+          success:function(result){                        
             data = JSON.parse(result);
+            alert(JSON.stringify(data.versions));
             sabors = data.sabors;
             idioma_altres_versions=data.altres_versions,
             versio_actual = data.versio_actual,
@@ -157,12 +158,17 @@
         carregaInicial(_contenedor,_contenedorEstructura,codiidioma);        
       }
       function carregaInicialCallback(idiomaACarregar){
-        var html='<div class="row"><h1 id="h1versiolliurex" class="col-md-6">LliureX '+versio_processada+'</h1><div id="llistatIdiomes" class="col-md-4"></div></div><div class="row"><div class="dropdown col-md-6 col-md-offset-1"><button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+idioma_altres_versions+'<span class="caret"></span>  </button>';
-        html +='<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">';
+        var html='<div class="row"><div class="col-md-3"><span id="h1versiolliurex" class="h1">LliureX '+versio_processada+'</span></div>';
+        var htmlIdiomes = '<div id="llistatIdiomes" class="col-md-6 col-md-offset-0"></div>';        
+        var htmlAltresVersions = '<div class="dropdown col-md-3"><button style="color:#777" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+idioma_altres_versions+'<span class="caret"></span>  </button>';
+        htmlAltresVersions +='<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">';
         for(var i=0;i<versions.length;i++){
-              html +='<li><a href="#" onClick="seleccionaVersio(&apos;'+versions[i]+'&apos;)">'+versions[i]+'</a></li>';
+              htmlAltresVersions +='<li><a href="#" onClick="seleccionaVersio(&apos;'+versions[i]+'&apos;)">'+versions[i]+'</a></li>';
         }        
-        html +='</ul></div></div>';                
+        htmlAltresVersions +='</ul></div>';        
+        html += htmlAltresVersions + htmlIdiomes; 
+        html +='</div>';
+        
         htmlVersions=creaHtmlSabors(versio_actual);        
         $('.'+_contenedor).html(html);
         $('#'+_contenedorEstructura).html(htmlVersions);
