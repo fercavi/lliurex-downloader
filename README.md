@@ -43,7 +43,6 @@ el vector sabors serà un vector on cada element tindrà:
    descripcio: descripcio llarga(a l'idioma seleccionat)
 #### vector imatges
 el  vector d'imatges contindrà, entre altres coses les url per a abaixar:
-
     url: url del arxiu per abaixar
     
     arquitectura: senyala l'arquitectura, de moment 0: 32 bits, 1 :64 bits
