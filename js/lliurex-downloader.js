@@ -11,6 +11,11 @@
       var idiomes = [];
       var _contenedor;
       var _contenedorEstructura;
+      var versions_velles=[];
+      var versions_velles_imatges=[];
+      var dialegVersioVella;
+      var tipusImatgesNormals = 0 ;
+      var tipusImatgesVelles = 1;
       //caldrà afegir-los segons vagen incrementant-se els idiomes
       var conversioidiomes = [
         {
@@ -42,12 +47,15 @@
       function descarrega(url){
         location.replace(url);
       }
-      function mostraOpcionsDescarrega(versio,sabor){
+      function mostraOpcionsDescarrega(versio,sabor,tipus){
         //arquitectura 0 =32 bits
         //arquitectura 1 = 64 bits
          //seleccionem totes les imatges de la versió i sabor corresponent
-         
-         var filtre = aplicarFiltreImatges(imatges,'versio',versio);
+         //segons el tipus elegim les imatges normals o les obsoletes (old_versions)
+         _imatges = imatges;
+         if (tipus==tipusImatgesVelles)
+          _imatges = versions_velles_imatges;
+         var filtre = aplicarFiltreImatges(_imatges,'versio',versio);
          filtre = aplicarFiltreImatges(filtre,'sabor',sabor);
          //l'unica cosa que falta ser'
          var filtre32bits=aplicarFiltreImatges(filtre,'arquitectura',0);         
@@ -101,11 +109,11 @@
                                     }]
                                     });
       }
-      function creaHtmlSabors(versio){
+      function creaHtmlSabors(_imatges,versio,tipus){
             var html ="";
-            var filtreVersio = aplicarFiltreImatges(imatges,'versio',versio);
+            var filtreVersio = aplicarFiltreImatges(_imatges,'versio',versio);                        
             for (var j=0;j<sabors.length;j++){                          
-              var filtreSabor = aplicarFiltreImatges(filtreVersio,"sabor",sabors[j].codi);              
+              var filtreSabor = aplicarFiltreImatges(filtreVersio,"sabor",sabors[j].codi);   
               if (filtreSabor.length>0){
                 html += "<div class='row'><div class='col-md-10 col-md-offset-1'><div class='panel panel-info'>";
                 html += "<div class='panel-heading'>";
@@ -115,7 +123,7 @@
                 html +="<ul class='span5 clearfix'>";
                 
                 html +="<img src='"+sabors[j].img+"' class='pull-left span2 clearfix' style='margin-right:10px'/>";
-                html += "<a onClick='mostraOpcionsDescarrega(&apos;"+versio+"&apos;,"+sabors[j].codi+")' class='btn btn-primary icon  pull-right' style='margin-top:10px;margin-right:10px'>"+idioma_descarrega+"</a>";
+                html += "<a onClick='mostraOpcionsDescarrega(&apos;"+versio+"&apos;,"+sabors[j].codi+","+tipus+")' class='btn btn-primary icon  pull-right' style='margin-top:10px;margin-right:10px'>"+idioma_descarrega+"</a>";
                 html +="<h4> <a href='#' >"+sabors[j].nom+"</a></h4><small>"+sabors[j].descripcio+"</small>";
                 html +="</ul>";              
                 html +="</div></div></div></div>";
@@ -124,7 +132,7 @@
             return html;
       }
       function seleccionaVersio(versio){        
-        htmlVersions=creaHtmlSabors(versio);
+        htmlVersions=creaHtmlSabors(imatges,versio,tipusImatgesNormals);
         versio_processada=versio;
         $('#'+_contenedorEstructura).html(htmlVersions);
         $('#h1versiolliurex').html('LliureX '+versio_processada);
@@ -136,16 +144,19 @@
           url:'servidor.php',
           type:'get',
           data:'idioma='+idiomaACarregar,
-          success:function(result){                        
-            data = JSON.parse(result);            
+          success:function(result){                   
+            data = JSON.parse(result);                
             sabors = data.sabors;
             idioma_altres_versions=data.altres_versions,
             versio_actual = data.versio_actual,
             versio_processada=versio_actual,
             idioma_descarrega = data.descarrega,
             idioma_versions = data.idioma_versions,
-            idioma_mesopcions = data.mes_opcions;
+            idioma_selecciona_versio=data.idioma_selecciona_versio;
+            idioma_mesopcions = data.mes_opcions;            
             versions = data.versions;
+            versions_velles= data.versions_velles;
+            versions_velles_imatges=data.versions_velles_imatges;
             imatges = data.imatges;
             idiomes = data.idiomes;            
             carregaInicialCallback(idiomaACarregar);
@@ -156,6 +167,33 @@
       function carregaIdioma(codiidioma){      
         carregaInicial(_contenedor,_contenedorEstructura,codiidioma);        
       }
+      function seleccionaVersioVella(versioVella){
+        var htmlVersions= creaHtmlSabors(versions_velles_imatges,versioVella,tipusImatgesVelles);        
+        $('#'+_contenedorEstructura).html(htmlVersions);
+        $('#h1versiolliurex').html('LliureX '+versioVella);
+        dialegVersioVella.close();
+      }
+      function mostraPopUpSeleccioAltresVersions(){
+        var html="<div class='list-group'>";
+        for(var i=0;i<versions_velles.length;i++){
+           html+="<button type='button' class='list-group-item' onClick='seleccionaVersioVella(&apos;"+versions_velles[i]+"&apos;)'>"+versions_velles[i]+"</button>";
+        }
+        html +='</div>';
+        BootstrapDialog.show({
+               title:idioma_selecciona_versio,
+               message:html,
+               buttons:[
+                    {
+                      label:'ok',
+                      action: function(dialogItself){                      
+                      dialogItself.close();
+                   }
+               }],
+               onshow: function(dialegItself){
+                dialegVersioVella = dialegItself;
+               },
+        });      
+      }
       function carregaInicialCallback(idiomaACarregar){
         var html='<div class="row"><div class="col-md-3"><span id="h1versiolliurex" class="h1">LliureX '+versio_processada+'</span></div>';
         var htmlIdiomes = '<div id="llistatIdiomes" class="col-md-6 col-md-offset-0"></div>';        
@@ -164,11 +202,12 @@
         for(var i=0;i<versions.length;i++){
               htmlAltresVersions +='<li><a href="#" onClick="seleccionaVersio(&apos;'+versions[i]+'&apos;)">'+versions[i]+'</a></li>';
         }        
+        htmlAltresVersions +="<li><a href='#' onClick='mostraPopUpSeleccioAltresVersions()'>"+idioma_altres_versions+"</a></li>";
         htmlAltresVersions +='</ul></div>';        
         html += htmlAltresVersions + htmlIdiomes; 
         html +='</div>';
         
-        htmlVersions=creaHtmlSabors(versio_actual);        
+        htmlVersions=creaHtmlSabors(imatges,versio_actual,tipusImatgesNormals);        
         $('.'+_contenedor).html(html);
         $('#'+_contenedorEstructura).html(htmlVersions);
         var htmlIdiomes = "<ul class='nav nav-pills'>";

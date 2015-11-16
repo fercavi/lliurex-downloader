@@ -35,20 +35,26 @@ require_once('./lang/'.$idioma_seleccionat. '.php'); //les descripcions de la in
 //processem totes les isos per afegir-les al vector i tindre una base de dades
 $arxius = buscaArxius("./isos/",".iso");
 for($i=0;$i<count($arxius);$i++){
-  $carpetes = explode("/",$arxius[$i][0]);
+  $carpetes = explode("/",$arxius[$i][0]);  
+  $arxiuiso=$carpetes[3];
+  if ($arxiuiso[0]==".")
+     continue;
   //afegim versions diferents
-  $possibleversio = substr($carpetes[2],0,5);   //llevem la part de 64bits
+  $possibleversio = substr($carpetes[2],0,5);   //llevem la part de 64bits  
+  $nomCalculat = '';
+  if ($carpetes[2]=='old_versions'){ //parxe per a evitar coses rares
+    continue;
+  }
   if (!in_array($possibleversio,$versions)){
     $versions[]=$possibleversio;
   }
-   //afegim sabors diferents
-  $arxiuiso=$carpetes[4];
+  //afegim sabors diferents  
   $filtre =str_replace("_","-",$arxiuiso);
   $filtre = str_replace(".","-",$filtre);
   $_sabors = explode("-",$filtre);
   $_possiblesabor = $_sabors[1];
   if (!in_array($_possiblesabor,$sabors)){
-    $sabors[]=$_possiblesabor;
+     $sabors[]=$_possiblesabor;
   }
   $arquitectura = 0;//per defecte 32 bits; calculem arquitectura i nom
   $nomarquitectura = "32 bits";
@@ -60,18 +66,20 @@ for($i=0;$i<count($arxius);$i++){
   if (esLatest($arxius[$i][0])){
     $esLatest = 1;
   }
-  //creem l'element iso'
-  $iso = array(
-    "versio"=>$possibleversio,
-    "sabor"=>array_search($_possiblesabor,$sabors),
-    "url"=>$arxius[$i][0],
-    "nom"=>$possibleversio." " . $_possiblesabor . " " . $nomarquitectura,
-    "arquitectura"=>$arquitectura,
-    "latest"=>$esLatest,
-    "nomarxiu"=>$arxiuiso,
-  );
-  $isos[]=$iso;
-  
+  //creem l'element iso
+  if ($nomCalculat =='')
+      $nomCalculat =$possibleversio." " . $_possiblesabor . " " . $nomarquitectura;
+   $iso = array(
+     "versio"=>$possibleversio,
+     "sabor"=>array_search($_possiblesabor,$sabors),
+     "url"=>$arxius[$i][0],
+     "nom"=>$nomCalculat,
+     "arquitectura"=>$arquitectura,
+     "latest"=>$esLatest,
+     "nomarxiu"=>$arxiuiso,
+    );
+   $isos[]=$iso;
+    
 }
 //ordenem la versio:
 asort($versions);
@@ -85,7 +93,7 @@ for($i=0;$i<count($arxius);$i++){
   $carpetes = explode("/",$arxius[$i][0]);  
   //afegim versions diferents
   $possibleversio = substr($carpetes[2],0,5);   //llevem la part de 64bits
-  $arxiuiso=$carpetes[4];
+  $arxiuiso=$carpetes[3];
   $arquitectura =0;
   $nomarquitectura = "32 bits";
   if (es64bits($arxius[$i][0])) {
@@ -111,7 +119,7 @@ for($i=0;$i<count($arxius);$i++){
   $carpetes = explode("/",$arxius[$i][0]);  
   //afegim versions diferents
   $possibleversio = substr($carpetes[2],0,5);   //llevem la part de 64bits
-  $arxiuiso=$carpetes[4];
+  $arxiuiso=$carpetes[3];
   $arquitectura =0;
   $nomarquitectura = "32 bits";
   if (es64bits($arxius[$i][0])) {
@@ -129,7 +137,44 @@ for($i=0;$i<count($arxius);$i++){
   );  
   $isos[]=$iso;
 }
+//ara processem les altres versions (old_versions)
+$old_versions=array();
+$old_versions_imatges= array();
+$arxius = buscaArxius('./isos/old_versions',".iso");
+for($i=0;$i<count($arxius);$i++){
+  $carpetes = explode("/",$arxius[$i][0]); 
+  $versio=$carpetes[3];
+  $arxiuiso=$carpetes[4];  
+  $esLatest = 0;
+  if (esLatest($arxius[$i][0])){
+    $esLatest = 1;
+  }
+  $arquitectura = 0;//per defecte 32 bits; calculem arquitectura i nom
+  $nomarquitectura = "32 bits";
+  if (es64bits($arxius[$i][0])) {
+    $arquitectura = 1;
+    $nomarquitectura = "64 bits";
+  }
+    //afegim sabors diferents  
+  $filtre =str_replace("_","-",$arxiuiso);
+  $filtre = str_replace(".","-",$filtre);
+  $_sabors = explode("-",$filtre);
+  $_possiblesabor = $_sabors[1];
+  $iso = array(
+    "versio"=>$versio,
+    "sabor"=>array_search($_possiblesabor,$sabors),
+    "url"=>$arxius[$i][0],
+    "nom"=>$versio." " . $_possiblesabor . " " . $nomarquitectura,
+    "arquitectura"=>$arquitectura,
+    "latest"=>$esLatest,
+    "nomarxiu"=>$arxiuiso,
+  ); 
+  $old_versions_imatges[]=$iso;
+  if (!in_array($versio,$old_versions))
+    $old_versions[]=$versio;
+}
 
+//PostProcessem les dades
 asort($versions);
 $__versions = array();
 foreach( $versions as $_versio){
@@ -143,7 +188,7 @@ for($i=0;$i<count($sabors);$i++){
     "nom"=>$lang_array[$sabors[$i]."_nom"],
     "descripcio"=>$lang_array[$sabors[$i]],
     "img"=>$imatge."lliurex-".$sabors[$i].".png",  
-    );  
+    ); 
 }
 //lliurex berry
 $sabors_complets[] = array(
@@ -156,7 +201,7 @@ $sabors_complets[] = array(
 $sabors_complets[] = array(
   "codi"=>$saborMD5,
   "nom"=>"md5sum",
-  "descripcio"=>"md5sum",
+  "descripcio"=>$lang_array["md5"],
   "img"=>$imatge."default.png",
 );
 
@@ -170,11 +215,16 @@ $result = array(
   "versions"=>$versions,
   "imatges"=>$isos,
   "idiomes"=>$llistat_idiomes,
+  "versions_velles"=>$old_versions,
+  "versions_velles_imatges"=>$old_versions_imatges,
+  "idioma_selecciona_versio"=>$lang_array["idioma_selecciona_versio"],
+  
 );
-
 echo json_encode($result);
-//error_log(var_export($result["versions"],true));
-//error_log(var_export($versions,true));
+
+
+
+
 //Funcions auxiliars
 function es64bits($cadena){
   $result = false;

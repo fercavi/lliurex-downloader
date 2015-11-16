@@ -21,6 +21,9 @@ $lang_array = array(
   "mesopcions"=>"Más opciones",
   "berry"=>"Imagen de cliente ligero para Raspberry",
   "berry_nom"=>"LliureX Berry",
+  "md5"=>"Código resumen para comprobar que la bajada ha sigo correcta y el archivo imagen no ha sido alterado",
+  "oldversions"=>"Otras versiones",
+  "idioma_selecciona_versio"=>"Selecciona versión",
 );
 
 ?>
