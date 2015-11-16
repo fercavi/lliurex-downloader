@@ -4,7 +4,8 @@
       var idioma_versions = '';//'Versions';
       var idioma_descarrega = '';//"Descarrega";
       var idioma_mesopcions = '';
-      var versio_processada;      
+      var idioma_versions_anteriors = '';
+      var versio_processada;            
       var llistat_idiomes = [];
       var versions = [];
       var imatges = [];
@@ -131,7 +132,10 @@
             }          
             return html;
       }
-      function seleccionaVersio(versio){        
+      function seleccionaVersio(versio){    
+        $('#menuAltresVersions').removeClass('disabled');
+        $('ul li ').removeClass('disabled');
+        $('#menu'+versio.replace(".","_")).addClass('disabled');
         htmlVersions=creaHtmlSabors(imatges,versio,tipusImatgesNormals);
         versio_processada=versio;
         $('#'+_contenedorEstructura).html(htmlVersions);
@@ -154,6 +158,7 @@
             idioma_versions = data.idioma_versions,
             idioma_selecciona_versio=data.idioma_selecciona_versio;
             idioma_mesopcions = data.mes_opcions;            
+            idioma_versions_anteriors = data.idioma_versions_anteriors;
             versions = data.versions;
             versions_velles= data.versions_velles;
             versions_velles_imatges=data.versions_velles_imatges;
@@ -167,13 +172,15 @@
       function carregaIdioma(codiidioma){      
         carregaInicial(_contenedor,_contenedorEstructura,codiidioma);        
       }
-      function seleccionaVersioVella(versioVella){
+      function seleccionaVersioVella(versioVella){        
         var htmlVersions= creaHtmlSabors(versions_velles_imatges,versioVella,tipusImatgesVelles);        
         $('#'+_contenedorEstructura).html(htmlVersions);
         $('#h1versiolliurex').html('LliureX '+versioVella);
         dialegVersioVella.close();
       }
       function mostraPopUpSeleccioAltresVersions(){
+        $('ul li ').removeClass('disabled');
+        $('#menuAltresVersions').addClass('disabled');
         var html="<div class='list-group'>";
         for(var i=0;i<versions_velles.length;i++){
            html+="<button type='button' class='list-group-item' onClick='seleccionaVersioVella(&apos;"+versions_velles[i]+"&apos;)'>"+versions_velles[i]+"</button>";
@@ -200,9 +207,9 @@
         var htmlAltresVersions = '<div class="dropdown col-md-3"><button style="color:#777" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">'+idioma_altres_versions+'<span class="caret"></span>  </button>';
         htmlAltresVersions +='<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">';
         for(var i=0;i<versions.length;i++){
-              htmlAltresVersions +='<li><a href="#" onClick="seleccionaVersio(&apos;'+versions[i]+'&apos;)">'+versions[i]+'</a></li>';
+              htmlAltresVersions +='<li id="menu'+versions[i].replace(".","_")+'"><a href="#" onClick="seleccionaVersio(&apos;'+versions[i]+'&apos;)">'+versions[i]+'</a></li>';
         }        
-        htmlAltresVersions +="<li><a href='#' onClick='mostraPopUpSeleccioAltresVersions()'>"+idioma_altres_versions+"</a></li>";
+        htmlAltresVersions +="<li id='menuAltresVersions'><a href='#' onClick='mostraPopUpSeleccioAltresVersions()'>"+idioma_versions_anteriors+"</a></li>";
         htmlAltresVersions +='</ul></div>';        
         html += htmlAltresVersions + htmlIdiomes; 
         html +='</div>';

@@ -24,6 +24,7 @@ $lang_array = array(
   "md5"=>"Codi resum per a comprovar que la baixada ha sigut correcta i l'arxiu no ha sigut alterat.",
   "oldversions"=>"Altres versions",
   "idioma_selecciona_versio"=>"Selecciona versió",
+  "versions_anteriors" =>"Versions anteriors",
 );
 
 ?>

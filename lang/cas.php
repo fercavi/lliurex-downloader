@@ -24,6 +24,7 @@ $lang_array = array(
   "md5"=>"Código resumen para comprobar que la bajada ha sigo correcta y el archivo imagen no ha sido alterado",
   "oldversions"=>"Otras versiones",
   "idioma_selecciona_versio"=>"Selecciona versión",
+  "versions_anteriors" =>"Versiones anteriores",
 );
 
 ?>

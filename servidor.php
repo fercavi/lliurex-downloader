@@ -218,6 +218,7 @@ $result = array(
   "versions_velles"=>$old_versions,
   "versions_velles_imatges"=>$old_versions_imatges,
   "idioma_selecciona_versio"=>$lang_array["idioma_selecciona_versio"],
+  "idioma_versions_anteriors"=>$lang_array["versions_anteriors"]
   
 );
 echo json_encode($result);
